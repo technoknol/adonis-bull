@@ -21,6 +21,7 @@ import {
 } from 'bullmq'
 import * as BullBoard from 'bull-board'
 import { BullMQAdapter } from 'bull-board/bullMQAdapter'
+import express from 'express'
 
 export class BullManager implements BullManagerContract {
   constructor(
@@ -117,14 +118,19 @@ export class BullManager implements BullManagerContract {
   }
 
   /* istanbul ignore next */
-  public ui(port = 9999) {
+  public ui(port = 9999, prefix = '/bull-server') {
     const board = BullBoard.createBullBoard(
       Object.keys(this.queues).map(
         (key) => new BullMQAdapter(this.getByKey(key).bull)
       )
     )
 
-    const server = board.router.listen(port, () => {
+    console.log('custom adonis bull package')
+
+    const app = express()
+    app.use(prefix, board.router)
+
+    const server = app.listen(port, () => {
       this.Logger.info(`bull board on http://localhost:${port}`)
     })
 
