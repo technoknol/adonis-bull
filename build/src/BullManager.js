@@ -92,7 +92,6 @@ class BullManager {
     /* istanbul ignore next */
     ui(port = 9999, prefix = '/bull-server') {
         const board = BullBoard.createBullBoard(Object.keys(this.queues).map((key) => new bullMQAdapter_1.BullMQAdapter(this.getByKey(key).bull)));
-        console.log('custom adonis bull package');
         const app = express_1.default();
         app.use(prefix, board.router);
         const server = app.listen(port, () => {

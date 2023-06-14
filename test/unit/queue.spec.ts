@@ -18,7 +18,7 @@ const CONNECTION_CONFIG = ({
   connections: {
     local: {
       host: process.env.REDIS_HOST || '127.0.0.1',
-      port: process.env.REDIS_PORT || 6379,
+      port: process.env.REDIS_PORT || 6479,
       password: process.env.REDIS_PASSWORD || '',
     },
   },
