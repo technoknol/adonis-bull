@@ -125,8 +125,6 @@ export class BullManager implements BullManagerContract {
       )
     )
 
-    console.log('custom adonis bull package')
-
     const app = express()
     app.use(prefix, board.router)
 
